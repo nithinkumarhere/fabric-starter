@@ -50,9 +50,13 @@ $ ls -lha
 Use this code to generate the Orderer:
 
 $ ./network.sh -m generate-orderer
+
 The Orderer generates and writes a genesis block
+
 Start the Orderer:
+
 ./network.sh -m up-orderer
+
 A genesis block combines the certificates of all the organizations
 
 ### Step 5: Connecting orgs and peers
