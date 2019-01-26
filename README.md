@@ -1,4 +1,72 @@
-# Starter Application for Hyperledger Fabric 1.1
+# Hyperledger Fabric 1.1.0 Multi Orgs with Multi Nodes
+
+## Setup
+
+### Prerequisites
+Before getting started on deployment, anyone following Vitaliy’s guide will need four work stations or cloud instances with:
+
+Linux Ubuntu 16.04 (or Cent OS 7)
+Docker-CE (v17.12.1-ce) and Docker-Compose (v1.8.0)
+In his presentation, Vitaliy set up his environment on Amazon Web Services (AWS). In case updates are needed, the following console commands can be run:
+
+$ sudo apt-get update && sudo apt-get -y install docker-compose git jq
+$ sudo usermod -aG docker $USER
+$ exit
+Once the prerequisites are met, simply follow the process step by step.
+
+### Step 1: Get Fabric Starter
+First, get Fabric Starter from GitHub.
+
+$ git clone https://github.com/nithinkumarhere/fabric-starter.git
+
+$ cd fabric-starter
+
+Run the commands on all four nodes
+ 
+### Step 2: Network configuration—mapping nodes
+Map the domain names of the nodes to real IP addresses.
+
+$ export IP_ORDERER=18.222.125.243 IP1=18.191.152.58 IP2=18.222.145.192 IP3=18.191.209.53
+Run the command on all four nodes
+Once a node is mapped, it becomes publicly accessible.
+
+### Step 3: Generating certificates
+Generate the certificates of the organizations on their nodes. Enter the following line on organization A’s host:
+
+$ ./network.sh -m generate-peer –o a
+Enter this line on organization B’s host:
+
+$ ./network.sh -m generate-peer –o b
+And this line on organization C’s host:
+
+$ ./network.sh -m generate-peer –o c
+
+Once a certificate is generated, it can be viewed using the following console command:
+
+$ ls -lha
+ 
+
+### Step 4: Generating the Orderer
+Use this code to generate the Orderer:
+
+$ ./network.sh -m generate-orderer
+The Orderer generates and writes a genesis block
+Start the Orderer:
+./network.sh -m up-orderer
+A genesis block combines the certificates of all the organizations
+
+### Step 5: Connecting orgs and peers
+Finally, connect the organizations to their peers. Run the following line on organization A’s host:
+
+$ ./network.sh -m up-1
+This line is for organization B’s host:
+
+$ ./network.sh -m up-2
+And this line for organization C’s host:
+
+$ ./network.sh -m up-3
+
+## How it works?
 
 Create a network to jump start development of your decentralized application.
 
