@@ -10,7 +10,9 @@ Docker-CE (v17.12.1-ce) and Docker-Compose (v1.8.0)
 In his presentation, Vitaliy set up his environment on Amazon Web Services (AWS). In case updates are needed, the following console commands can be run:
 
 $ sudo apt-get update && sudo apt-get -y install docker-compose git jq
+
 $ sudo usermod -aG docker $USER
+
 $ exit
 Once the prerequisites are met, simply follow the process step by step.
 
